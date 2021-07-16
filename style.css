@@ -1,0 +1,221 @@
+@keyframes start {
+    0% {
+        transform: rotateX(80deg);
+        transform-origin: top center;
+    }
+    50% {
+        transform: rotateX(0deg);
+        transform-origin: top center;
+    }
+    80% {
+        transform: rotateX(35deg);
+        transform-origin: top center;
+    }
+    100% {
+        transform: rotateX(0deg);
+        transform-origin: top center;
+    }
+}
+
+@keyframes drop {
+    0% {
+        opacity: 1;
+        top: 0px;
+    }
+    100% {
+        opacity: 0;
+        top: 300px;
+    }
+}
+
+@keyframes dust {
+    0% {
+        filter:blur(0px);
+        transform: translateY(0px);
+    }
+
+    100% {
+        filter: blur(50px);
+        transform: translateY(300px);
+    }
+}
+
+@keyframes name-jiggle {
+    0% {
+        transform: rotate(-5deg);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        transform: rotate(-15deg) scale(1);
+    }
+    25% {
+        transform: rotate(-15deg) scale(2);
+    }
+    50% {
+        transform: rotate(-15deg) scale(1);
+    }
+    75% {
+        transform: rotate(-15deg) scale(2);
+    }
+    100% {
+        transform: rotate(-15deg) scale(1);
+    }
+}
+
+* {
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    background-color: rgb(228, 235, 240);
+}
+
+.letter {
+    border: solid 2px coral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: whitesmoke;
+}
+
+.letter:hover {
+    background-color: coral;
+    color: white;
+}
+
+.game-wrapper {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    /* margin: 50px; */
+}
+
+.winner-box {
+    border: solid 2px lightgray;
+    position: fixed;
+    display: flex;
+    width: 70%;
+    height: 50%;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    visibility: hidden;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    color: white;
+    background-image: linear-gradient(135deg,
+    rgb(92, 191, 255),
+    rgb(255, 92, 109)
+    );
+}
+
+.correct {
+    position: absolute;
+    transform: rotate(-15deg);
+    animation: pulsate 2s linear infinite;
+}
+
+.bg {
+    color: rgb(80, 105, 94); /* 237, 92, 255 Pink */
+    transform: rotate(-15deg) scale(1);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.jack-name {
+    position: absolute;
+    transform: rotate(-5deg);
+    top: 70%;
+    left: 60%;
+    animation: name-jiggle 1s linear infinite;
+}
+
+.guess-again {
+    border: solid 2px lightgray;
+    position: fixed;
+    display: flex;
+    width: 70%;
+    height: 50%;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 35rem;
+    color: red;
+    visibility: hidden;
+
+}
+
+
+/*  */
+/* Classes to be added for game animations */
+
+.start {
+    animation: start 800ms linear;
+}
+
+.selection {
+    position: relative;
+    animation: drop 1s ease-in; /* new animation */
+}
+
+
+/*  */
+/* For animation tests */
+
+.test { /* remove perspective with javascript after initial animation so that the transition is corrected and not overlapping.*/
+    width: 50%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    color: gray;
+    background-color: aquamarine;
+    transition-duration: 300ms;
+    transition-property: transform;
+    perspective: 800px;
+    perspective-origin: bottom;
+}
+
+.test:hover {
+    transform: scale(1.25);
+}
+
+.test::after {
+    content: '';
+    filter: blur(50px);
+}
+
+.test:hover::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    background-color: cadetblue;
+    width: 100%;
+    height: 5px;
+    animation: dust 1000ms linear;
+}
