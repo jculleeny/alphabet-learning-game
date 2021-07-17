@@ -1,10 +1,10 @@
 const alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+let letter;
 
 const gameBox = document.querySelector('#game-box');
 const winnerBox = document.querySelector('#winner-box');
 const guessAgain = document.querySelector('#guess-again');
 
-let letter;
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -31,8 +31,14 @@ function wrongGuess() {
     guessAgain.style.visibility = "visible";
     setTimeout( () => {
         guessAgain.style.visibility = "hidden";
-    }, 3000)
-}
+    }, 800)
+};
+
+function voice(toSpeech) { // TODO: check that the input is a string
+    let msg = new SpeechSynthesisUtterance();
+    msg.text = toSpeech;
+    window.speechSynthesis.speak(msg);
+};
 
 function delayVoice() {
     setTimeout( () => {
@@ -41,7 +47,7 @@ function delayVoice() {
         msg.text = alphabetArray[randAlphabetPosition];
         letter = alphabetArray[randAlphabetPosition];
         window.speechSynthesis.speak(msg);
-    }, 3500);
+    }, 3000);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,9 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 gameBox.addEventListener('click', e => {
+    let wrongGuessesArray = [
+        'You silly goose',
+        'Try again stinky',
+        'Keep going',
+        `That's not a ${letter}`,
+        'Better luck next time',
+        'Cheeky boom boom',
+        'You can do better'
+    ];
     if(e.target.id == letter) {
         winnerBox.style.visibility = 'visible';
-        // alert('You win!');
+        voice('Correct');
+    } else {
+        let getRandVoiceLine = wrongGuessesArray[getRndInteger(0, wrongGuessesArray.length)];
+        voice(getRandVoiceLine);
+        wrongGuess();
     }
     e.target.classList.add('selection');
     setTimeout( () => {

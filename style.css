@@ -114,6 +114,7 @@ body {
     position: fixed;
     display: flex;
     width: 70%;
+    max-width: 900px;
     height: 50%;
     top: 20%;
     left: 0;
@@ -135,13 +136,7 @@ body {
     position: absolute;
     transform: rotate(-15deg);
     animation: pulsate 2s linear infinite;
-}
-
-.bg {
-    color: rgb(80, 105, 94); /* 237, 92, 255 Pink */
-    transform: rotate(-15deg) scale(1);
-    filter: blur(10px);
-    z-index: -1;
+    filter: drop-shadow(0 0 10px rgb(80, 105, 94));
 }
 
 .jack-name {
@@ -150,10 +145,29 @@ body {
     top: 70%;
     left: 60%;
     animation: name-jiggle 1s linear infinite;
+    filter: drop-shadow(0 0 10px rgb(80, 105, 94));
+}
+
+#restart {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+}
+
+#restart:active {
+    background-color: white;
+    color: black;
 }
 
 .guess-again {
-    border: solid 2px lightgray;
+    /* border: solid 2px lightgray; */
     position: fixed;
     display: flex;
     width: 70%;
@@ -168,9 +182,12 @@ body {
     font-size: 35rem;
     color: red;
     visibility: hidden;
-
 }
 
+.controls-container {
+    border: solid 1px aqua;
+    margin-top: 50px;
+}
 
 /*  */
 /* Classes to be added for game animations */
