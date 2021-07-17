@@ -1,9 +1,12 @@
 const alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 let letter;
+let childName;
 
 const gameBox = document.querySelector('#game-box');
 const winnerBox = document.querySelector('#winner-box');
 const guessAgain = document.querySelector('#guess-again');
+const repeatButton = document.querySelector('#repeat');
+const restartButton = document.querySelector('#restart');
 
 
 function getRndInteger(min, max) {
@@ -24,6 +27,8 @@ function start() {
     setInterval(interval , 100);
     alphabetArray.forEach(e => {
         document.querySelector(`#${e}`).classList.remove('start');
+        // console.log(e);
+        document.querySelector(`#${e}`).style.visibility = 'visible';
     });
 };
 
@@ -49,6 +54,15 @@ function delayVoice() {
         window.speechSynthesis.speak(msg);
     }, 3000);
 };
+
+function repeatLetter() {
+    voice(letter);
+};
+
+function restartGame() {
+    start();
+    winnerBox.style.visibility = 'hidden';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     start();
@@ -78,6 +92,15 @@ gameBox.addEventListener('click', e => {
         e.target.style.visibility = "hidden"; // TODO: if you target the #game-box div, than everything disappears. needs fix.
     }, 1000)
 });
+
+repeatButton.addEventListener('click', () => {
+    repeatLetter();
+});
+
+restartButton.addEventListener('click', () => {
+    restartGame();
+    delayVoice();
+})
 
 let alphabet = alphabetArray.map(el => `<div class="letter" id="${el}">${el.toUpperCase()}</div>`).join('');
 gameBox.innerHTML = `${alphabet}`;

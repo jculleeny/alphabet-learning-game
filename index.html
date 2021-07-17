@@ -9,8 +9,39 @@
 </head>
 <body>
     <div class="main-container">
+
+        <div id="setup-box" class="setup-box">
+            <div class="form-wrapper">
+
+                <div class="slide">
+                    <button>Alphabet</button>
+                    <button>Numbers</button>
+                </div>
+
+                <div class="slide">
+                    <label for="name"><h4>Child's Name</h4></label>
+                    <input type="text" name="name" id="name">
+                </div>
+
+                <div class="slide">
+                    <label for="phrases"><h4>Phrases</h4></label>
+                    <p>
+                        Short phrases for when your child gets the wrong answer. They can
+                        be silly, motivational, or whatever you like.
+                    </p>
+                    <div class="phrase-inputs">
+                        <input type="text">
+                        <input type="text">
+                        <input type="text">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
         <div id="game-box" class="game-wrapper">
-            
+            <!-- Alphabet to be dynamically created -->
         </div>
 
         <div id="winner-box" class="winner-box">
@@ -24,18 +55,11 @@
         </div>
 
         <div id="guess-again" class="guess-again">
-            <h2>X</h2>
+            <h2>&#10006;</h2>
         </div>
 
-        <!-- ****For testing animations**** -->
-        <!-- <div class="test letter">
-            <div class="test-persepective">
-                Test
-            </div>
-        </div> -->
-
-        <div class="controls-container">
-            <button id="repeat" type="button">Repeat</button>
+        <div id="repeat" class="controls-container">
+            <button class="button" type="button">Repeat</button>
         </div>
     </div>
     <script src="index.js"></script>
