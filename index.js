@@ -1,5 +1,6 @@
 const alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 let letter;
+let numbersArray = [];
 let childName;
 
 const gameBox = document.querySelector('#game-box');
@@ -7,7 +8,15 @@ const winnerBox = document.querySelector('#winner-box');
 const guessAgain = document.querySelector('#guess-again');
 const repeatButton = document.querySelector('#repeat');
 const restartButton = document.querySelector('#restart');
+const singButton = document.querySelector('#sing');
 
+// class Game {
+//     constructor(length, playerName) {
+//         this.length = this.length;
+//         this.playerName = this.playerName;
+
+//     }
+// }
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -23,11 +32,9 @@ function interval() {
 };
 
 function start() {
-    let i = 0;
     setInterval(interval , 100);
     alphabetArray.forEach(e => {
         document.querySelector(`#${e}`).classList.remove('start');
-        // console.log(e);
         document.querySelector(`#${e}`).style.visibility = 'visible';
     });
 };
@@ -60,9 +67,21 @@ function repeatLetter() {
 };
 
 function restartGame() {
+    letter = null;
     start();
     winnerBox.style.visibility = 'hidden';
 }
+
+function createNumberArray(maxNum) {
+    for(i = 1; i <= maxNum; i++) {
+        numbersArray.push(i);
+    };
+};
+
+function startNumberGame() {
+    let numbers = numbersArray.map(el => `<div class="letter" id="${el}">${el}</div>`).join('');
+    gameBox.innerHTML = `${numbers}`;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     start();
@@ -100,7 +119,16 @@ repeatButton.addEventListener('click', () => {
 restartButton.addEventListener('click', () => {
     restartGame();
     delayVoice();
+});
+
+singButton.addEventListener('click', () => { //Doesn't sync with voice at all
+    alphabetArray.forEach(e => {
+        document.querySelector(`#${e}`).classList.add('start');
+        voice(e);
+        document.querySelector(`#${e}`).classList.remove('start');
+    })
 })
 
 let alphabet = alphabetArray.map(el => `<div class="letter" id="${el}">${el.toUpperCase()}</div>`).join('');
 gameBox.innerHTML = `${alphabet}`;
+
